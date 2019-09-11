@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+
+</head>
+<body>
+<!--导航开始-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadown-small">
+
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>列表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+
+        </div>
+    </div>
+
+
+</nav>
+
+<!--导航结束-->
+<!--主体内容开始-->
+<div class="ui m-container">
+    <form action="/input" th:action="@{/input}" th:object="${appraisalVo}" method="post">
+
+        <table class="ui celled table center-aligned" id="table-container">
+            <thead>
+            <tr>
+                <th>序号</th>
+
+                <th>标准</th>
+                <th>周期</th>
+                <th>单位</th>
+                <th>目标值</th>
+                <th>实际值</th>
+                <th>考核结果</th>
+                <th>考核单位</th>
+                <th>操作符</th>
+
+                <th>操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="appraisal,rowStat:${appraisalVo.apps}">
+                <td th:text="${rowStat.count}">1</td>
+
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].biaozhun}" style="width: 40px;"></td>
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].zhouqi}" style="width: 40px;"></td>
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].danwei}" style="width: 40px;"></td>
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].mubiaozhi}" style="width: 60px;"></td>
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].shijishi}" style="width: 60px;"></td>
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].kaohejieguo}" style="width: 60px;"></td>
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].kaohedanwei}" style="width: 60px;"></td>
+                <td ><input type="text" value="" th:field="*{apps[__${rowStat.index}__].caozuofu}"  style="width: 100px;"></td>
+                <td>
+                    <a href="#"  class="ui mini teal basic button m-padded-mini" style="width: 50px;">编辑</a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <button type="submit" class="ui positive basic button">提交</button>
+
+    </form>
+</div>
+</body>
+<!--jQuery js-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--semantic ui js-->
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+
+</script>
+</html>
