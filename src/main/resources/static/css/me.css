@@ -1,5 +1,5 @@
 body{
-    background: url("../images/bg.png");
+    background: url("");
 }
 
 .m-padded-mini{
@@ -98,7 +98,7 @@ body{
 }
 /*--------------container---------*/
 .m-container{
-     max-width: 72em !important;
+     max-width: 95em !important;
      margin: auto !important;
  }
 .m-container-small{

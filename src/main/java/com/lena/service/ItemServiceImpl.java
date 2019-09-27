@@ -4,9 +4,12 @@ import com.lena.dao.ItemRepository;
 import com.lena.entity.Appraisalitem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +25,8 @@ public class ItemServiceImpl implements ItemService {
     private ItemRepository itemRepository;
     @Override
     public Appraisalitem getAppraisalitem(Long id) {
-        return null;
+
+        return itemRepository.findById(id).get();
     }
 
     @Override
@@ -33,11 +37,15 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Appraisalitem saveAppraisalitem(Appraisalitem appraisalitem) {
-        return null;
+        System.out.println(appraisalitem.getCaozuofu());
+
+        return itemRepository.save(appraisalitem);
+
     }
 
     @Override
     public Appraisalitem updateAppraisalitem(Long id, Appraisalitem appraisalitem) {
+
         return null;
     }
 
@@ -48,6 +56,37 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Appraisalitem> findAll() {
-        return itemRepository.findAll();
+        List<Appraisalitem> result=new ArrayList<>();
+        List<Appraisalitem> list=itemRepository.findAll();
+        list.forEach(appr->{
+            if(LocalDate.now().getDayOfMonth()>15) {
+                appr.setKaoheyuefen(LocalDate.now().getMonthValue()+"月");
+            }else {
+                appr.setKaoheyuefen(LocalDate.now().getMonthValue()-1+"月");
+            }
+            result.add(appr);
+        });
+        return result;
     }
+    // 测试用,返回五条数据
+    @Override
+    public List<Appraisalitem> findAll2() {
+        List<Appraisalitem> result=new ArrayList<>();
+        //该方法已过时->PageRequest.of
+        //Pageable pageable=new PageRequest(0,5);
+        Pageable pageable=PageRequest.of(0,5);
+        Page<Appraisalitem> all = itemRepository.findAll(pageable);
+        List<Appraisalitem> list = all.getContent();
+        list.forEach(appr->{
+            if(LocalDate.now().getDayOfMonth()>15) {
+                appr.setKaoheyuefen(LocalDate.now().getMonthValue()+"月");
+            }else {
+                appr.setKaoheyuefen(LocalDate.now().getMonthValue()-1+"月");
+            }
+            result.add(appr);
+        });
+        return result;
+    }
+
+
 }

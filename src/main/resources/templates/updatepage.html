@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+
+</head>
+<body>
+<!--导航开始-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadown-small">
+
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>列表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+
+        </div>
+    </div>
+
+
+</nav>
+<br>
+
+<!--导航结束-->
+<!--主体内容开始-->
+<div  class="m-container-small m-padded-tb-big">
+<div class="ui m-container">
+    <h4 class="ui dividing header">您可以对当前考核数据进行编辑。</h4>
+
+    <form class="ui form" action="/update" th:action="@{/update}" method="post">
+
+    <!--月份 部门分厂 项目 标准 周期 单位 目标值 实际值 考核结果 考核单位 操作符 备注-->
+
+        <div class="two fields">
+            <div class="field">
+                <label>ID</label>
+                <input placeholder="Read Only" readonly="" type="text" name="id" th:value="${appr.id}">
+            </div>
+            <div class="field">
+                <label>月份</label>
+                <input placeholder="Read Only" readonly="" type="text" name="kaoheyuefen" th:value="${appr.kaoheyuefen}">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>单位</label>
+                <input placeholder="Read Only" readonly="" type="text" name="beikaohedanwei" th:value="${appr.beikaohedanwei}">
+            </div>
+            <div class="field">
+                <label>考核项目</label>
+                <input placeholder="Read Only" readonly="" type="text" name="kaohexiangmu" th:value="${appr.kaohexiangmu}">
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label>标准</label>
+                <input placeholder="Read Only" readonly="" type="text" name="biaozhun" th:value="${appr.biaozhun}">
+            </div>
+            <div class="field">
+                <label>周期</label>
+                <input placeholder="Read Only" readonly="" type="text" name="zhouqi" th:value="${appr.zhouqi}">
+            </div>
+            <div class="field">
+                <label>单位</label>
+                <input placeholder="Read Only" readonly="" type="text" name="danwei" th:value="${appr.danwei}">
+            </div>
+        </div>
+        <div class="two fields">
+
+            <div class="required field">
+                <label>目标值</label>
+                <input type="text" name="mubiaozhi" th:value="${appr.mubiaozhi}">
+            </div>
+            <div class="required field">
+                <label>实际值</label>
+                <input type="text" name="shijishi" th:value="${appr.shijishi}">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="required field">
+                <label>运算符</label>
+                <input type="text" name="caozuofu"  th:value="${appr.caozuofu}">
+            </div>
+            <div class="required field">
+                <label>考核结果</label>
+                <input type="text" name="kaohejieguo"  th:value="${appr.kaohejieguo}">
+            </div>
+        </div>
+
+        <div class="field">
+            <label>备注</label>
+            <input type="text" name="beizhu" th:value="${appr.beizhu}">
+        </div>
+        <div class="ui error message"></div>
+
+        <button type="submit" class="ui green inverted button m-padded">提交</button>
+        <a href="#" th:href="@{/list}" class="ui olive inverted button m-padded" >返回</a>
+
+    </form>
+
+
+
+</div>
+</div>
+
+</body>
+<!--jQuery js-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--semantic ui js-->
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--layui js-->
+<script src="/layui/layui.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $('.ui.form').form({
+        fields : {
+            mubiaozhi : {
+                identifier: 'mubiaozhi',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入目标值'
+                },
+                {
+                    type : 'number',
+                    prompt: '请输入数字'
+                }]
+            },
+            shijishi : {
+                identifier: 'shijishi',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入实际值'
+                },
+                {
+                    type : 'number',
+                    prompt: '请输入数字'
+                }]
+            },
+            caozuofu : {
+                identifier: 'caozuofu',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入正确的运算符'
+                }]
+            }
+
+        }
+    });
+</script>
+</html>

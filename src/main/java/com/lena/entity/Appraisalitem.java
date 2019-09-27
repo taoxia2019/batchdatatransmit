@@ -1,13 +1,18 @@
 package com.lena.entity;
 
+
 import lombok.Data;
 
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @ClassName Appraisalitem
@@ -17,27 +22,38 @@ import javax.persistence.Table;
  * @Version 1.0
  */
 
-
+//考核项目初始化表
 @Entity
 @Table
-public class Appraisalitem {
+public class Appraisalitem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String kaohezhouqi;
+    //月份
+    private String kaoheyuefen;
+    //部门分厂
     private String beikaohedanwei;
+    //项目
     private String kaohexiangmu;
-
+    //标准
     private String biaozhun;
+    //周期
     private String zhouqi;
+    //单位
     private String danwei;
+    //目标值
     private Double mubiaozhi;
-
+    //实际值
     private Double shijishi;
+    //考核结果
     private Double kaohejieguo;
+    //考核单位
     private String kaohedanwei;
+    //操作符
     private String caozuofu;
-
+    //备注
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
     private String beizhu;
 
 
@@ -49,12 +65,12 @@ public class Appraisalitem {
         this.id = id;
     }
 
-    public String getKaohezhouqi() {
-        return kaohezhouqi;
+    public String getKaoheyuefen() {
+        return kaoheyuefen;
     }
 
-    public void setKaohezhouqi(String kaohezhouqi) {
-        this.kaohezhouqi = kaohezhouqi;
+    public void setKaoheyuefen(String kaoheyuefen) {
+        this.kaoheyuefen = kaoheyuefen;
     }
 
     public String getBeikaohedanwei() {
@@ -149,7 +165,7 @@ public class Appraisalitem {
     public String toString() {
         return "Appraisalitem{" +
                 "id=" + id +
-                ", kaohezhouqi='" + kaohezhouqi + '\'' +
+                ", kaohezhouqi='" + kaoheyuefen + '\'' +
                 ", beikaohedanwei='" + beikaohedanwei + '\'' +
                 ", kaohexiangmu='" + kaohexiangmu + '\'' +
                 ", biaozhun='" + biaozhun + '\'' +

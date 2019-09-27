@@ -17,4 +17,6 @@ public interface ItemService {
 
     void deleteAppraisalitem(Long id);
     List<Appraisalitem> findAll();
+    //测试用,返回五条数据
+    List<Appraisalitem> findAll2();
 }
