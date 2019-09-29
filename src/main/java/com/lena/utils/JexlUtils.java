@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
  */
 //动态解析数据库公式，计算结果
 public class JexlUtils {
-    public static  Double evaluate(Double y, Double x, String exper){
+    public static  Double evaluate(Double y, Double x, String exper) throws Exception{
         DecimalFormat    df   = new DecimalFormat("######0.00");
         JexlContext jc =new MapContext();
 

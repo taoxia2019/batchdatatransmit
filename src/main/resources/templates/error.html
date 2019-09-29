@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+
+</head>
+<body>
+<!--导航开始-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadown-small">
+
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>列表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+
+        </div>
+    </div>
+
+
+</nav>
+<br>
+
+<!--导航结束-->
+<!--主体内容开始-->
+<div class="ui m-container">
+    <div class="m-container-small m-padded-tb-massive">
+        <div class="ui error message m-padded-tb-huge" >
+            <div class="ui contianer">
+                <h2>错误</h2>
+                <p>对不起，服务异常，请联系管理员</p>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+</div>
+
+
+
+
+</body>
+<!--jQuery js-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--semantic ui js-->
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--layui js-->
+
+</html>

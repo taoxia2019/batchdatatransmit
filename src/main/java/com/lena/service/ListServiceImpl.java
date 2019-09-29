@@ -2,6 +2,7 @@ package com.lena.service;
 
 import com.lena.dao.ListRepositry;
 import com.lena.entity.AppraisalList;
+import com.lena.exception.MyParseException;
 import com.lena.utils.JexlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,12 @@ public class ListServiceImpl implements ListService {
         Double y = appraisallist.getShijishi();
         Double x = appraisallist.getMubiaozhi();
         String czf = appraisallist.getCaozuofu();
-        Double evaluate = JexlUtils.evaluate(y, x, czf);
+        Double evaluate = null;
+        try {
+            evaluate = JexlUtils.evaluate(y, x, czf);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //获取经过运算符计算的考核结果
         appraisallist.setKaohejieguo(evaluate);
 
@@ -50,7 +56,13 @@ public class ListServiceImpl implements ListService {
         Double y = appraisallist.getShijishi();
         Double x = appraisallist.getMubiaozhi();
         String czf = appraisallist.getCaozuofu();
-        Double evaluate = JexlUtils.evaluate(y, x, czf);
+        Double evaluate = null;
+        try {
+            evaluate = JexlUtils.evaluate(y, x, czf);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            throw new MyParseException();
+        }
         appraisallist.setKaohejieguo(evaluate);
         return listRepositry.save(appraisallist);
     }
