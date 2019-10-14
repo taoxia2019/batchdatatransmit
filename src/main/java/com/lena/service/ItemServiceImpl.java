@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName ItemServiceImpl
@@ -94,8 +96,27 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<AppraisalList> findAll3() {
-        return listRepositry.findAll();
+    public List<Appraisalitem> findAll3() {
+        return itemRepository.findAll();
+    }
+
+    @Override
+    public int savefield(Integer id, String apprField, String fieldValue) {
+        Optional<Appraisalitem> byId = itemRepository.findById(id.longValue());
+        Appraisalitem appraisalitem = byId.get();
+
+        if ("shijishi".equals(apprField)) {
+            appraisalitem.setShijishi(Double.parseDouble(fieldValue));
+            appraisalitem.setKaohejieguo(appraisalitem.getShijishi()*123);
+
+        }else if("kaohejieguo".equals(apprField)){
+            appraisalitem.setKaohejieguo(Double.parseDouble(fieldValue));
+        }else {
+            appraisalitem.setCaozuofu(fieldValue);
+        }
+        System.out.println(appraisalitem.getShijishi()+"---------------");
+        Appraisalitem save = itemRepository.save(appraisalitem);
+        return save!=null?1:0;
     }
 
 

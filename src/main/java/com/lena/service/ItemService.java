@@ -20,5 +20,7 @@ public interface ItemService {
     List<Appraisalitem> findAll();
     //测试用,返回五条数据
     List<Appraisalitem> findAll2();
-    List<AppraisalList> findAll3();
+    List<Appraisalitem> findAll3();
+
+    int savefield(Integer id, String apprField, String fieldValue);
 }

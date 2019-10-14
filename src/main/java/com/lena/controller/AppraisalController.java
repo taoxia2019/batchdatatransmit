@@ -67,11 +67,17 @@ public class AppraisalController {
     private ListService listService;
 
 
+
     @ResponseBody
     @RequestMapping("/editfield")
-    public DataGridView editfield(AppraisalList appr){
-        System.out.println(appr.getId());
-        System.out.println(appr.getId());
+    public DataGridView editfield(Integer id,String apprField,String fieldValue){
+        System.out.println("---------");
+        System.out.println(id+"-----"+apprField+"-----"+fieldValue);
+        System.out.println("---------");
+        int savefield = itemService.savefield(id, apprField, fieldValue);
+        if(savefield>0){
+            System.out.println("保存成功--------------------");
+        }
 
         return new DataGridView();
     }
