@@ -1,8 +1,11 @@
 package com.lena;
 
+import com.lena.base.DataGridView;
 import com.lena.dao.ItemRepository;
+import com.lena.dao.ListRepositry;
 import com.lena.entity.Appraisalitem;
 import com.lena.service.ItemService;
+import com.lena.service.ListService;
 import org.apache.commons.jexl2.Expression;
 import org.apache.commons.jexl2.ExpressionImpl;
 import org.apache.commons.jexl2.JexlContext;
@@ -24,9 +27,28 @@ import java.time.format.DateTimeFormatter;
 public class InputtabledemoApplicationTests {
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private ItemRepository itemRepository;
+    @Autowired
+    private ListRepositry listRepositry;
 
-	@Test
-	public void contextLoads() {
+
+    @Autowired
+    private ListService listService;
+
+    @Test
+    public void test2() {
+        System.out.println(new DataGridView(100, itemService.findAll3()));
+    }
+
+
+    @Test
+    public void test1() {
+        listRepositry.findAll().forEach(y -> System.out.println(y.getBiaozhun()));
+    }
+
+    @Test
+    public void contextLoads() {
 //		JexlContext jc =new MapContext();
 //		jc.set("x",560);
 //		jc.set("y",50);
@@ -40,28 +62,28 @@ public class InputtabledemoApplicationTests {
         String caozuofu = ap.getCaozuofu();
 
         Double evaluate = evaluate(shijishi, mubiaozhi, caozuofu);
-		System.out.println(evaluate);
+        System.out.println(evaluate);
 
 
-	}
+    }
 
-	public Double evaluate(Double y, Double x, String exper){
-        DecimalFormat    df   = new DecimalFormat("######0.00");
-        JexlContext jc =new MapContext();
+    public Double evaluate(Double y, Double x, String exper) {
+        DecimalFormat df = new DecimalFormat("######0.00");
+        JexlContext jc = new MapContext();
 
-		jc.set("y",y);
-        jc.set("x",x);
-		Expression expression = new JexlEngine().createExpression(exper);
-		Double value=Double.parseDouble(expression.evaluate(jc).toString());
+        jc.set("y", y);
+        jc.set("x", x);
+        Expression expression = new JexlEngine().createExpression(exper);
+        Double value = Double.parseDouble(expression.evaluate(jc).toString());
         String format = df.format(value);
         return Double.parseDouble(format);
-	}
+    }
 
-	@Test
-	public void getDate(){
+    @Test
+    public void getDate() {
         System.out.println(LocalDate.now());
-        System.out.println(LocalDate.now().getMonthValue()+"月");
-        System.out.println(LocalDate.now().getDayOfMonth()>20?LocalDate.now().getMonthValue():LocalDate.now().getMonthValue()-1);
+        System.out.println(LocalDate.now().getMonthValue() + "月");
+        System.out.println(LocalDate.now().getDayOfMonth() > 20 ? LocalDate.now().getMonthValue() : LocalDate.now().getMonthValue() - 1);
 
 
     }

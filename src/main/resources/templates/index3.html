@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+
+</head>
+<body>
+<!--导航开始-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadown-small">
+
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>列表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>测试</a>
+
+        </div>
+    </div>
+
+
+</nav>
+<br>
+
+
+
+
+<!--导航结束-->
+<!--主体内容开始-->
+<div class="ui m-container">
+
+    <div class="ui buttons">
+        <button class="ui blue button" onclick="exportall()">下载</button>
+        <div class="or"></div>
+        <button class="ui positive button" id="test3">上传</button>
+    </div>
+
+ <!--   <div class="layui-card">
+        <table id="table" lay-filter="member"></table>
+    </div>-->
+
+
+    <table class="layui-table" lay-data="{url:'/getlist123', id:'test3'}" lay-filter="test3">
+        <thead>
+        <tr>
+            <th lay-data="{type:'checkbox'}">ID</th>
+            <th lay-data="{field:'id', width:80, sort: true}">ID</th>
+            <th lay-data="{field:'kaoheyuefen', width:120, sort: true, edit: 'text'}">月份</th>
+            <th lay-data="{field:'beikaohedanwei', edit: 'text', minWidth: 80}">部门分厂</th>
+            <th lay-data="{field:'kaohexiangmu', width:80, edit: 'text'}">项目</th>
+            <th lay-data="{field:'biaozhun', width:80, edit: 'text'}">标准</th>
+            <th lay-data="{field:'zhouqi', width:80, edit: 'text'}">周期</th>
+            <th lay-data="{field:'danwei', width:80}">单位</th>
+            <th lay-data="{field:'mubiaozhi', width:80}">目标值</th>
+            <th lay-data="{field:'shijishi', width:80, edit: 'text'}">实际值</th>
+            <th lay-data="{field:'caozuofu', width:80, edit: 'text'}">操作符</th>
+            <th lay-data="{field:'kaohejieguo', width:80, edit: 'text'}">考核结果</th>
+            <th lay-data="{field:'kaohedanwei', width:80, edit: 'text'}">考核单位</th>
+            <th lay-data="{field:'beizhu', width:80, edit: 'text'}">备注</th>
+        </tr>
+        </thead>
+    </table>
+
+
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+
+
+<!--弹出层开始
+<div class="ui basic modal">
+    <div class="ui icon header">
+        <i class="archive icon"></i>
+        Messages
+    </div>
+    <div class="content">
+        <p>上传成功，是否再次上传？</p>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </div>
+        <div class="ui green ok inverted button">
+            <i class="checkmark icon"></i>
+            Yes
+        </div>
+    </div>
+</div>
+弹出层结束-->
+</body>
+<!--jQuery js-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--semantic ui js-->
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--layui js-->
+<script src="./static/layui/layui.js" charset="utf-8" th:src="@{/layui/layui.js}"></script>
+
+<script type="text/javascript">
+    layui.use('table', function() {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#table'
+            , url: '/getlist123' //数据接口
+            , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            , page: true //开启分页
+            , cols: [
+                [ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                    ,{field:'kaoheyuefen', title: '月份',width:120, sort: true}
+                    ,{field:'beikaohedanwei', title: '部门分厂',minWidth: 80}
+                    ,{field:'kaohexiangmu', title: '项目',width:80}
+                    ,{field:'biaozhun', title: '标准',width:80}
+                    ,{field:'zhouqi', title: '周期',width:80}
+                    ,{field:'danwei', title: '单位',width:80}
+                    ,{field:'mubiaozhi', title: '目标值',width:80}
+                    ,{field:'shijishi', title: '实际值',width:80}
+                    ,{field:'caozuofu', title: '操作符',width:80}
+                    ,{field:'kaohejieguo', title: '考核结果',width:80,edit: 'text'}
+                    ,{field:'kaohedanwei', title: '考核单位',width:80,edit: 'text'}
+                    ,{field:'beizhu', title: '备注',width:80}
+                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
+                ]
+            ],
+            done:function () {
+                checkPermission()
+            }
+        });
+
+
+        //监听单元格编辑
+        table.on('edit(test3)', function(obj){
+            var value = obj.value //得到修改后的值
+                ,data = obj.data //得到所在行所有键值
+                ,field = obj.field; //得到字段
+            layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
+            $.ajax({
+                url: "/editfield",
+                type: "POST",
+                data: {
+                    id:data.id,
+                    field:value
+                },
+                dataType: 'json',
+                success: function (result) {
+                        layer.alert("设置成功", {icon: 6}, function () {
+                            table.render({
+                                elem: '#test3'
+                                ,cols: [] //设置表头
+                                ,url: '/getlist123' //设置异步接口
+                                ,id: 'test3'
+                            });
+
+                        });
+                    }
+
+                }
+            });
+
+        });
+
+
+    });
+
+
+
+
+    function exportall() {
+        var url = "exportall";
+        window.open(url);
+    };
+
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+        //指定允许上传的文件类型
+        upload.render({
+            elem: '#test3'
+            , url: '/importall'
+            , accept: 'file' //普通文件
+            ,done: function(res) {
+                //假设code=0代表上传成功
+                if (res.code == 0) {
+                    $('.ui.basic.modal')
+                        .modal('show');
+                };
+            }
+        });
+    })
+
+</script>
+</html>

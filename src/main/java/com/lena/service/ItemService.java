@@ -1,5 +1,6 @@
 package com.lena.service;
 
+import com.lena.entity.AppraisalList;
 import com.lena.entity.Appraisalitem;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,5 @@ public interface ItemService {
     List<Appraisalitem> findAll();
     //测试用,返回五条数据
     List<Appraisalitem> findAll2();
+    List<AppraisalList> findAll3();
 }

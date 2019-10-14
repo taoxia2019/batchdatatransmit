@@ -1,5 +1,6 @@
 package com.lena.controller;
 
+import com.lena.base.DataGridView;
 import com.lena.entity.AppraisalList;
 import com.lena.entity.Appraisalitem;
 import com.lena.service.ItemService;
@@ -65,22 +66,45 @@ public class AppraisalController {
     @Autowired
     private ListService listService;
 
-    @GetMapping("/")
-    public String getPage(Model model) {
-        AppraisalVo appraisalVo = new AppraisalVo();
-        // 测试用,返回五条数据
-        appraisalVo.setApps(itemService.findAll2());
-        model.addAttribute("appraisalVo", appraisalVo);
 
-        return "index";
+    @ResponseBody
+    @RequestMapping("/editfield")
+    public DataGridView editfield(AppraisalList appr){
+        System.out.println(appr.getId());
+        System.out.println(appr.getId());
+
+        return new DataGridView();
     }
+
+    @RequestMapping("/getlist123")
+    @ResponseBody
+    public DataGridView getPage(Model model) {
+//        AppraisalVo appraisalVo = new AppraisalVo();
+//        // 测试用,返回五条数据
+//        appraisalVo.setApps(itemService.findAll2());
+//        model.addAttribute("appraisalVo", appraisalVo);
+
+        System.out.println(new DataGridView(100, itemService.findAll3()));
+        return new DataGridView(100, itemService.findAll3());
+    }
+
+    @GetMapping("/")
+    public String getListPage1(Model model) {
+//        AppraisalVo appraisalVo = new AppraisalVo();
+//        // 测试用,返回五条数据
+//        appraisalVo.setApps(itemService.findAll2());
+//        model.addAttribute("appraisalVo", appraisalVo);
+
+        return "/index3";
+    }
+
 
     @GetMapping("list")
     public String getListPage(Model model) {
 
         model.addAttribute("list", listService.findAll());
 
-        return "list";
+        return "/list";
     }
 
     //从编辑按钮跳转到编辑页面，根据ID携带考核项目数据
@@ -89,7 +113,7 @@ public class AppraisalController {
         AppraisalList appraisallist = listService.getAppraisallist(id);
         model.addAttribute("appr",appraisallist);
 
-        return "updatepage";
+        return "/updatepage";
     }
     //更新考核项目数据，1条
     @PostMapping("/update")

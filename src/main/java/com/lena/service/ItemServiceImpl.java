@@ -1,6 +1,8 @@
 package com.lena.service;
 
 import com.lena.dao.ItemRepository;
+import com.lena.dao.ListRepositry;
+import com.lena.entity.AppraisalList;
 import com.lena.entity.Appraisalitem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,9 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private ListRepositry listRepositry;
     @Override
     public Appraisalitem getAppraisalitem(Long id) {
 
@@ -86,6 +91,11 @@ public class ItemServiceImpl implements ItemService {
             result.add(appr);
         });
         return result;
+    }
+
+    @Override
+    public List<AppraisalList> findAll3() {
+        return listRepositry.findAll();
     }
 
 
